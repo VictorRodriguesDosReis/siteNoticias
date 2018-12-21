@@ -1,0 +1,22 @@
+body {
+	background-color: #eee;
+}
+
+
+/* Header */
+.navbar {
+	background-color: #F24500;
+	box-shadow: 0px 0px 10px #000e;
+}
+
+.navbar-brand {
+	display: block !important;
+	margin: auto !important;
+	color: #fff;
+	transition: all 1s;
+}
+
+.navbar-brand:hover {
+	color: #fff;
+	text-shadow: 1px 1px 3px #0007;
+}

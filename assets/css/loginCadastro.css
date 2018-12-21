@@ -1,0 +1,68 @@
+/* Login e Cadastro */
+.login-cadastro {
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: 0;
+}
+
+.login-cadastro {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 2px 2px 7px #0008;
+	margin: 10% auto 0 auto;
+	padding: 0;
+}
+
+.login-cadastro h1 {
+	border-bottom: groove 2px #0008;
+	border-radius: 10px 10px 0 0;
+	background-color: #F24500;
+	color: #fff;
+	padding: 5px 0;
+	text-align: center;
+	text-shadow: 1px 1px 3px #0005
+}
+
+.login-cadastro form {
+	margin: 0 50px;
+	padding: 7px 0 20px 0;
+}
+
+.login-cadastro label {
+	color: #F24500;
+	font-weight: bold;
+	margin-bottom: 0px;
+}
+
+.login-cadastro input {
+	border-color: #A62F00;
+}
+
+.login-cadastro input::placeholder {
+	color: #F27949;
+}
+
+.login-cadastro button {
+	background-color: #F24500;
+	color: #fff;
+	display: block;
+	margin: 30px auto 0 auto;
+	padding: 5px 40px;
+	transition: all 1s;
+}
+
+.login-cadastro button:hover {
+	box-shadow: 1px 1px 4px #000a;
+	text-shadow: 1px 1px 2px #0006;
+}
+
+.login-cadastro a {
+	color: #F24500;
+}
+
+
+/* Cadastro */
+#div-cadastro {
+	margin-top: 4%;
+}

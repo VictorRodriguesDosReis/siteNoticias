@@ -1,0 +1,126 @@
+/* Notícias Principais */
+#principais-noticias {
+	display: grid;
+	grid-template-areas: "noticia1 noticia2" "noticia1 noticia3";
+	margin-top: 5%;
+}
+
+#principais-noticias div {
+	padding: 0;
+}
+
+#principais-noticias div:nth-child(1) {
+	grid-area: noticia1;
+	padding-right: 5px;
+}
+
+#principais-noticias div:nth-child(2) {
+	grid-area: noticia2;
+	padding-left: 5px;
+}
+
+#principais-noticias div:nth-child(3) {
+	grid-area: noticia3;
+	padding-left: 5px;
+	margin-top: 10px;
+}
+
+#principais-noticias > div > div {
+	border: solid 2px #A62F00;
+	background: #B55A3644;
+	border-radius: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#principais-noticias .descricao-noticia {
+	position: absolute;
+	bottom: 20px;
+	padding: 0 13px
+}
+
+#principais-noticias .descricao-noticia h1{
+	color: #F24500;
+	text-shadow: 2px 2px 3px #000d;
+}
+
+#principais-noticias .descricao-noticia span{
+	color: #fff;
+	text-shadow: 1px 1px 2px #000;
+}
+
+#principais-noticias #noticia-principal {
+	height: 500px;
+}
+
+#principais-noticias .noticia-sub-principal {
+	height: 100%;
+}
+
+
+/* Seção que agrupa a coluna da direita e esquerda */
+#secao-principal {
+	margin-top: 5%;
+}
+
+
+/* Coluna da esquerda */
+#coluna-esquerta {
+	padding-right: 5px;
+}
+
+.card-noticias {
+	border-top: solid 2px #A62F00;
+	padding: 10px 0;
+}
+
+.card-noticias h3 {
+	color: #F24500;
+	font-weight: bold;
+}
+
+.card-noticias .data-noticia {
+	font-size: 0.8em;
+	margin-top: 8px;
+	color: #B55A36;
+}
+
+
+/* Coluna da direita */
+#coluna-direita {
+	padding-left: 5px;
+}
+
+.noticias-destaque {
+	background-color: #fff;
+	box-shadow: 1px 1px 10px #1114;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+
+.noticias-destaque div {
+	margin: 0 10px;
+	padding: 7px 2px;
+	border-top: solid 2px #A62F00;
+}
+
+.noticias-destaque div:nth-child(2) {
+	border: none;
+}
+
+.noticias-destaque h3 {
+	font-size: 1.5em;
+	padding: 7px 7px;
+	border-bottom: groove 2px #eee;
+}
+
+.noticias-destaque h5 {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #F24500;
+}
+
+.noticias-destaque span {
+	font-size: 0.9em;
+}
