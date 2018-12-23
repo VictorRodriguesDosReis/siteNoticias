@@ -7,11 +7,13 @@ body {
 .navbar {
 	background-color: #F24500;
 	box-shadow: 0px 0px 10px #000e;
+	padding: 0; 
 }
 
 .navbar-brand {
 	display: block !important;
 	margin: auto !important;
+	padding: 10px 0;
 	color: #fff;
 	transition: all 1s;
 }
@@ -19,4 +21,45 @@ body {
 .navbar-brand:hover {
 	color: #fff;
 	text-shadow: 1px 1px 3px #0007;
+}
+
+.links-menu {
+	position: relative; 
+}
+
+.links-menu > ul {
+	position: absolute;
+}
+
+#link-esquerda > ul {
+	left: 0;
+}
+
+#link-direita > ul {
+	right: 0;
+}
+
+.links-menu > ul > li {
+	padding: 5px 10px;
+	transition: all 1s;
+}
+
+.links-menu > ul > li:hover {
+	background-color: #7b2300;
+}
+
+.links-menu > ul > li:hover > a {
+	color: #fff;
+}
+
+.links-menu > ul > li.active {
+	background-color: #a62f00;
+}
+
+.links-menu > ul > li.active > a {
+	color: #fff !important;
+}
+
+.links-menu > ul > li > a {
+	color: #7b2300;
 }

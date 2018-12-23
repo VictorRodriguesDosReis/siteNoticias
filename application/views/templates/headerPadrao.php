@@ -17,10 +17,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<header>
 		<nav class="navbar navbar-expand-md">
 			<div class="container">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".links-menu" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+				<div class="collapse navbar-collapse links-menu" id="link-esquerda">
+					<ul class="navbar-nav">
+						<li class="nav-item <?php if (isset($onHome)) echo 'active' ?>">
+							<a href="<?php echo base_url()?>home" class="nav-link">Home</a>
+						</li>
+						<li class="nav-item <?php if (isset($onNoticia)) echo 'active' ?>">
+							<a href="#" class="nav-link">Notícia</a>
+						</li>
+					</ul>
+				</div>
+
 				<a class="navbar-brand" href="">
-					<img src="">
 					Web News
 				</a>
+
+				<div class="collapse navbar-collapse links-menu" id="link-direita">
+					<ul class="navbar-nav">
+						<li class="nav-item <?php if (isset($onLogin)) echo 'active' ?>">
+							<a href="<?php echo base_url()?>login" class="nav-link">Login</a>
+						</li>
+						<li class="nav-item <?php if (isset($onCadastro)) echo 'active' ?>">
+							<a href="<?php echo base_url()?>cadastro" class="nav-link">Cadastro</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</nav>
 	</header>

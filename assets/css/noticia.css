@@ -1,0 +1,155 @@
+section.container > .row {
+	margin-top: 50px;
+}
+
+hr {
+	border-bottom: solid 1px #A62F00;
+}
+
+/* Seção da Noticia */
+header {
+	text-align: justify;
+}
+
+#titulo {
+	color: #F24500;
+}
+
+#sub-titulo {
+	color: #555;
+	font-size: 1.2em;
+}
+
+#autor {
+	color: #A62F00;
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0;
+}
+
+#dados-publicacao {
+	margin-top: 15px;
+	padding-bottom: 10px;
+	border-bottom: solid 1px #A62F00;
+}
+
+#dados-publicacao time {
+	font-size: 1.1em;
+}
+
+#noticia {
+	margin-top: 20px;
+	font-size: 1.3em;
+	text-align: justify;
+}
+
+#noticia p {
+	margin-bottom: 10px;
+	text-indent: 15px;
+}
+
+#noticia figure {
+	margin: 15px 0;
+}
+
+#noticia img {
+	width: 100%;
+}
+
+#noticia figcaption {
+	color: #555;
+	font-size: 0.7em;
+}
+
+
+/* Noticias destaque (aside) */
+.noticias-destaque {
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 1px 1px 5px #bbb;
+	margin: 10px 0 10px 0;
+	overflow: auto;
+	cursor: pointer;
+	transition: all 0.5s;
+}
+
+.noticias-destaque:hover {
+	box-shadow: 1px 1px 5px #555;
+}
+
+.noticias-destaque img {
+	float: left;
+	margin-right: 10px;
+	width: 30%;
+	height: 105px;
+}
+
+.noticias-destaque h3 {
+	color: #F24500;
+	font-size: 1.1em;
+	margin: 7px 0;
+	transition: all 0.5s;
+}
+
+.noticias-destaque:hover h3 {
+	color: #A62F00;
+}
+
+
+/* Seção dos comentários */
+#div-comentarios > div{
+	margin: auto;
+	display: block;
+}
+
+#div-comentarios h2 {
+	color: #F24500;
+}
+
+#div-comentarios form label {
+	color: #A62F00;
+	margin: 10px 0 0 0;
+}
+
+#div-comentarios input, #div-comentarios textarea {
+	border-color: #A62F00;
+}
+
+#div-comentarios input::placeholder, #div-comentarios textarea::placeholder {
+	color: #F27949;
+}
+
+#div-comentarios button {
+	background-color: #F24500;
+	color: #fff;
+	text-align: center;
+	width: 100%;
+	transition: all 0.5s;
+}
+
+#div-comentarios button:hover {
+	box-shadow: 1px 1px 4px #000a;
+	text-shadow: 1px 1px 2px #0006;
+}
+
+
+/* Comentário individual */
+.comentarios {
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: solid 1px #aaa;
+	text-indent: 5px;
+}
+
+.comentarios p{
+	margin: 0;
+}
+
+.comentarios .autor-comentario {
+	color: #111;
+	font-weight: bold;
+}
+
+.comentarios .texto-comentario {
+	text-align: justify;
+}

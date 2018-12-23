@@ -100,7 +100,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		</section>
 	</div>
-
+	
 	<script type="text/javascript" src="<?php echo base_url('assets')?>/js/home.js"></script>
 </body>
 </html>

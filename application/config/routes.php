@@ -55,3 +55,5 @@ $route['default_controller'] = 'home';
 
 $route['login'] = 'login';
 $route['cadastro'] = 'cadastro';
+$route['(:any)/dashboard'] = 'dashboard/index/$1';
+$route['noticias'] = 'noticia';
