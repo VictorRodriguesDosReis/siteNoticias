@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="container">
 		<div class="row">
 			<section class="col-md-8" id="cria-noticia">
-				<form>
+				<form id="form-noticia" method="post">
 					<div class="form-group">
 						<label for="titulo">Título</label>
 						<input type="text" name="titulo" id="titulo" class="form-control" placeholder="Título">
@@ -25,6 +25,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</section>
 		</div>
 	</div>
-
+	
+	<script type="text/javascript">
+		var baseURL = '<?php echo base_url(); ?>';
+	</script>
+	<script type="text/javascript" src="<?php echo base_url('assets')?>/js/dashboard.js"></script>
 </body>
 </html>

@@ -54,6 +54,13 @@ $route['translate_uri_dashes'] = FALSE;
 $route['default_controller'] = 'home';
 
 $route['login'] = 'login';
+$route['login/verificar-conta'] = 'login/verificarConta';
+
 $route['cadastro'] = 'cadastro';
-$route['(:any)/dashboard'] = 'dashboard/index/$1';
+$route['cadastro/criar-conta'] = 'cadastro/criarConta';
+
+$route['usuario/dashboard'] = 'dashboard';
+$route['usuario/deslogar'] = 'dashboard/deslogar';
+$route['usuario/dashboard/publicar-noticia'] = 'dashboard/publicarNoticia';
+
 $route['noticias'] = 'noticia';

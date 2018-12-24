@@ -1,5 +1,34 @@
 $(document).ready(function() {
+
+	/* EVENTOS */
+	$('#abri-login').click({abrir: 'login'}, mostrarDiv);
+	$('#abri-cadastro').click({abrir: 'cadastro'}, mostrarDiv);
 	
+	$("#form-cadastro").submit(function(event) {
+		event.preventDefault();
+
+		var dados = $('#form-cadastro').serialize();
+		$.post(baseURL+'cadastro/criar-conta', dados, function(resultado) {
+			if (resultado == 'error')
+				apresentaMenssagem('erroCadastro');
+			else if (resultado == 'success')
+				window.location = baseURL+"usuario/dashboard";
+		});
+	});
+
+	$("#form-login").submit(function(event) {
+		event.preventDefault();
+
+		var dados = $('#form-login').serialize();
+		$.post(baseURL+'login/verificar-conta', dados, function(resultado) {
+			if (resultado == 'error')
+				apresentaMenssagem('erroCadastro');
+			else if (resultado == 'success')
+				window.location = baseURL+"usuario/dashboard";
+		});
+	});
+
+	/* FUNÇÕES */
 	function mostrarDiv(event) {
 		event.preventDefault();
 		history.pushState("data", "", event.data.abrir);
@@ -20,8 +49,5 @@ $(document).ready(function() {
 		div.css('z-index', 1);
 
 	}
-
-	$('#abri-login').click({abrir: 'login'}, mostrarDiv);
-	$('#abri-cadastro').click({abrir: 'cadastro'}, mostrarDiv);
 
 });

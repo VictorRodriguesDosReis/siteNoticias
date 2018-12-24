@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+define('SALT', 'd615480fb5de07ef959a02346891f23d');
+
 /*
 |--------------------------------------------------------------------------
 | Display Debug backtrace

@@ -8,14 +8,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="col-md-5 login-cadastro" id="div-login" <?php if (isset($hideLogin)) echo $hideLogin; ?>>
 				<h1>Login</h1>
 
-				<form method="POST">
+				<form id="form-login" method="post">
 					<div class="form-group">
 						<label for="email">E-mail</label>
-						<input type="email" name="email" class="form-control" id="email" placeholder="E-mail" required>
+						<input type="email" name="email" class="form-control" id="email" placeholder="E-mail" maxlength="254" required>
 					</div>
 					<div class="form-group">
 						<label for="senha">Senha</label>
-						<input type="password" name="senha" class="form-control" id="senha" placeholder="Senha" required>
+						<input type="password" name="senha" class="form-control" id="senha" maxlength="20" placeholder="Senha" required>
 					</div>
 
 					<button type="submit" class="btn">Entrar</button>
@@ -27,22 +27,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="col-md-5 login-cadastro" id="div-cadastro" <?php if (isset($hideCadastro)) echo $hideCadastro; ?>>
 				<h1>Cadastro</h1>
 
-				<form method="POST">
+				<form id="form-cadastro" method="post">
 					<div class="form-group">
 						<label for="nome">Nome</label>
-						<input type="text" name="nome" class="form-control" id="nome" placeholder="Nome Completo" required>
+						<input type="text" name="nome" class="form-control" id="nome" placeholder="Nome Completo" maxlength="35" required>
 					</div>
 					<div class="form-group">
 						<label for="email">E-mail</label>
-						<input type="email" name="email" class="form-control" id="email" placeholder="E-mail" required>
+						<input type="email" name="email" class="form-control" id="email" placeholder="E-mail" maxlength="254" required>
 					</div>
 					<div class="form-group">
 						<label for="senha">Senha</label>
-						<input type="password" name="senha" class="form-control" id="senha" placeholder="Senha" required>
+						<input type="password" name="senha" class="form-control" id="senha" placeholder="Senha" maxlength="20" required>
 					</div>
 					<div class="form-group">
 						<label for="confirma-senha">Confirmar senha</label>
-						<input type="password" name="confirma-senha" class="form-control" id="confirma-senha" placeholder="Confirmar senha" required>
+						<input type="password" name="confirma-senha" class="form-control" id="confirma-senha" maxlength="20" placeholder="Confirmar senha" required>
 					</div>
 
 					<button type="submit" class="btn">Criar conta</button>
@@ -52,5 +52,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</div>
 	</section>
+	
 
+	<script type="text/javascript">
+		var baseURL = '<?php echo base_url() ?>';
+	</script>
 	<script type="text/javascript" src="<?php echo base_url('assets')?>/js/loginCadastro.js"></script>
