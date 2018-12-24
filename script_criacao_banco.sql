@@ -18,8 +18,8 @@ create table tb_noticia (
     ds_titulo varchar(100) not null,
     ds_subtitulo varchar(250),
     ds_noticia longtext not null,
-    dt_criacao timestamp not null,
-    dt_alteracao datetime,
+    dt_criacao datetime not null,
+    dt_alteracao timestamp,
     ic_ativo tinyint(1) not null default 1,
     cd_autor int(2) not null,
     constraint pk_noticia
@@ -60,8 +60,8 @@ end $$
 create procedure p_I_Noticia(titulo varchar(100), subtitulo varchar(250), 
 	noticia longtext, codigoUsuario int(2))
 begin
-	insert into tb_noticia (ds_titulo, ds_subtitulo, ds_noticia, cd_autor) 
-		values (titulo, subtitulo, noticia, codigoUsuario);
+	insert into tb_noticia (ds_titulo, ds_subtitulo, ds_noticia, dt_criacao, cd_autor) 
+		values (titulo, subtitulo, noticia, now(), codigoUsuario);
 end $$
 
 -- SELECT
@@ -69,6 +69,14 @@ end $$
 create procedure p_S_LoginAutor(email varchar(254), senha char(32))
 begin
 	select cd_autor as codigo, nm_autor as nome from tb_autor where ds_email = email and ds_senha = senha;
+end $$
+
+-- Retorna uma determinada quantidade de notícia iniciando pelo ponto desejado
+create procedure p_S_NoticiaParcial(codigoInicio int(5), quantidade int(5))
+begin
+	select cd_noticia codigo, ds_titulo titulo, ds_subtitulo subtitulo, dt_alteracao data
+		from tb_noticia 
+			where cd_noticia >= codigoInicio limit quantidade;
 end $$
 
 delimiter ;
