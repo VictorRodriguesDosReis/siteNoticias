@@ -76,7 +76,7 @@ create procedure p_S_NoticiaParcial(codigoInicio int(5), quantidade int(5))
 begin
 	select cd_noticia codigo, ds_titulo titulo, ds_subtitulo subtitulo, dt_alteracao data
 		from tb_noticia 
-			where cd_noticia >= codigoInicio limit quantidade;
+			where cd_noticia >= codigoInicio order by dt_alteracao desc limit quantidade;
 end $$
 
 delimiter ;
