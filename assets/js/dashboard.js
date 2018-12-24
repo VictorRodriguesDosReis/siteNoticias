@@ -8,7 +8,7 @@ $(document).ready(function() {
 			if (resultado == 'error')
 				apresentaMenssagem('erroCadastro');
 			else if (resultado == 'success')
-				alert('foi')
+				alert('Noticia publicada com sucesso!')
 		});
 	});
 

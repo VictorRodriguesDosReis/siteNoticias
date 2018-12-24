@@ -37,17 +37,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<section class="row" id="secao-principal">
 			<section class="col-md-7" id="noticias-recentes">
 				<?php 
-				for ($i = 0; $i < 10; $i++) {
+					foreach ($noticiasParciais as $noticia) {
 				?>
-
 					<div class="card-noticias">
-						<h3>Lorem ipsum dolor sit amet</h3>
-						<span>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						</span>
-						<div class="data-noticia">11/11/2011 11:11</div>
+						<h3><?php echo $noticia['titulo'] ?></h3>
+						<span><?php echo $noticia['subtitulo'] ?></span>
+						<div class="data-noticia"><?php echo $noticia['data'] ?></div>
+						<input type="hidden" name="codigo" value="<?php echo $noticia['codigo'] ?>">
 					</div>
 
 				<?php } ?>
