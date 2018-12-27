@@ -64,6 +64,13 @@ begin
 		values (titulo, subtitulo, noticia, now(), codigoUsuario);
 end $$
 
+-- Insere um novo comentário no banco
+create procedure p_I_Comentario (nome varchar(20), comentario varchar(255), codigoNoticia mediumint(8))
+begin
+	insert into tb_comentario(nm_leitor, ds_comentario, cd_noticia)
+		values (nome, comentario, codigoNoticia);
+end $$
+
 -- SELECT
 -- Verifica se existe o usuario no banco
 create procedure p_S_LoginAutor(email varchar(254), senha char(32))
@@ -77,6 +84,23 @@ begin
 	select cd_noticia codigo, ds_titulo titulo, ds_subtitulo subtitulo, dt_alteracao data
 		from tb_noticia 
 			where cd_noticia >= codigoInicio order by dt_alteracao desc limit quantidade;
+end $$
+
+-- Retorna informações da notícia solicitada
+create procedure p_S_NoticiaCompleta(codigo int(5))
+begin            
+	select ds_titulo titulo, ds_subtitulo subtitulo, ds_noticia noticia, 
+		(select nm_autor from tb_autor a where a.cd_autor = n.cd_autor) autor, dt_criacao, dt_alteracao
+		from tb_noticia n
+			where cd_noticia = codigo;
+end $$
+
+-- Retorna os comentários da notícia solicitada
+create procedure p_S_Comentarios(codigo int(5))
+begin
+	select nm_leitor leitor, ds_comentario comentario, dt_criacao
+		from tb_comentario 
+			where cd_noticia = codigo;
 end $$
 
 delimiter ;
