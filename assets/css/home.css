@@ -75,9 +75,17 @@
 	padding: 10px 0;
 }
 
-.card-noticias h3 {
+.card-noticias h3 a {
 	color: #F24500;
 	font-weight: bold;
+	text-decoration: none;
+	transition: color 0.3s;
+}
+
+.card-noticias h3 a:hover {
+	color: #D43C00;
+	font-weight: bold;
+	text-decoration: none;
 }
 
 .card-noticias .data-noticia {

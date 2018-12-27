@@ -63,4 +63,5 @@ $route['usuario/dashboard'] = 'dashboard';
 $route['usuario/deslogar'] = 'dashboard/deslogar';
 $route['usuario/dashboard/publicar-noticia'] = 'dashboard/publicarNoticia';
 
-$route['noticias'] = 'noticia';
+$route['noticia/(:num)'] = 'noticia/index/$1';
+$route['noticia/publicar-comentario'] = 'noticia/publicaComentario';

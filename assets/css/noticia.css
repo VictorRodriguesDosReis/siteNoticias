@@ -115,6 +115,10 @@ header {
 	border-color: #A62F00;
 }
 
+#div-comentarios textarea {
+	height: 100px;
+}
+
 #div-comentarios input::placeholder, #div-comentarios textarea::placeholder {
 	color: #F27949;
 }
@@ -148,6 +152,11 @@ header {
 .comentarios .autor-comentario {
 	color: #111;
 	font-weight: bold;
+}
+
+.comentarios .data-comentario {
+	color: #555;
+	font-size: 0.7em;
 }
 
 .comentarios .texto-comentario {

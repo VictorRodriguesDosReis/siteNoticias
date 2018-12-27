@@ -8,47 +8,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="row">
 		<article class="col-md-8">
 			<header>
-				<h1 id="titulo">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua.</h1>
-				<span id="sub-titulo">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat.</span>
+				<h1 id="titulo"><?php echo $noticia['titulo']; ?></h1>
+				<span id="sub-titulo"><?php echo $noticia['subtitulo'] ?></span>
 			</header>
 
 			<div id="dados-publicacao">
-				<p id="autor">Por Victor Rodrigues</p>
-				<time>11/11/2011 11h11</time>
+				<p id="autor"><?php echo $noticia['autor']; ?></p>
+				<time><?php 
+					echo date('d/m/Y H:i:s', strtotime($noticia['dt_criacao'])); 
+					if ($noticia['dt_criacao'] != $noticia['dt_alteracao'])
+						echo ' - atualizado '.date('d/m/Y H:i:s', strtotime($noticia['dt_criacao']));
+					?></time>
 			</div>
 
 			<div id="noticia">
-				<figure>
-					<img src="https://picsum.photos/1000/500/?random">
-					<figcaption>Lorem ipsum dolor sit amet</figcaption>
-				</figure>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-				<figure>
-					<img src="https://picsum.photos/900/400/?random">
-					<figcaption>Lorem ipsum dolor sit amet</figcaption>
-				</figure>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<?php echo $noticia['noticia']; ?>
 			</div>
 		</article>
 		<aside class="col-md-4">
@@ -65,32 +39,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<div class="row" id="div-comentarios">
 		<div class="col-lg-9">
-			<h2>12 Comentários</h2>
+			<h2><?php echo count($comentarios); ?> Comentários</h2>
 
-			<form>
+			<form id="form-comentario" method="post">
 				<div>
 					<label for="nome">Nome</label>
-					<input type="text" name="nome" id="nome" class="form-control" placeholder="Digite seu nome..." required>
+					<input type="text" name="nome" id="nome" class="form-control" placeholder="Digite seu nome..." maxlength="20" required>
 				</div>
 				<div class="form-group">
 					<label for="comentario">Comentário</label>
-					<textarea name="comentario" id="comentario" class="form-control" placeholder="Escreva um comentário..." required></textarea>
+					<textarea name="comentario" id="comentario" class="form-control" placeholder="Escreva um comentário..." maxlength="250" required></textarea>
 				</div>
+				<input type="hidden" name="codigo" value="<?php echo $codigo; ?>">
 
 				<button type="submit" class="btn">Enviar</button>
 			</form>
 			
 			<hr>
 
-			<?php for ($i=0; $i < 5; $i++) { ?>
+			<?php foreach ($comentarios as $comentario) { ?>
 				<div class="comentarios">
-					<p class="autor-comentario">João dos Santos</p>
-					<p class="texto-comentario">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+					<p class="autor-comentario"><?php echo $comentario['leitor']; ?></p>
+					<p class="data-comentario"><?php echo date('d/m/Y H:i:s', strtotime($comentario['dt_criacao'])); ?></p>
+					<p class="texto-comentario"><?php echo $comentario['comentario']; ?></p>
 				</div>
 			<?php } ?>
 
 		</div>
 	</div>
 </section>
+
+<script type="text/javascript">
+	var baseURL = '<?php echo base_url() ?>';
+</script>
+<script type="text/javascript" src="<?php echo base_url('assets')?>/js/noticia.js"></script>

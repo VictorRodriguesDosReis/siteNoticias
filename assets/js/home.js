@@ -16,6 +16,4 @@ $(document).ready(function() {
 		
 	});
 
-	//$('#principais-noticias > div > div').mouseleave();
-
 });

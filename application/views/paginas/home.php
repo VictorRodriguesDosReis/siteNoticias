@@ -40,10 +40,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					foreach ($noticiasParciais as $noticia) {
 				?>
 					<div class="card-noticias">
-						<h3><?php echo $noticia['titulo'] ?></h3>
+						<h3><a href="<?php echo base_url().'noticia/'.$noticia['codigo'] ?>"><?php echo $noticia['titulo'] ?></a></h3>
 						<span><?php echo $noticia['subtitulo'] ?></span>
-						<div class="data-noticia"><?php echo $noticia['data'] ?></div>
-						<input type="hidden" name="codigo" value="<?php echo $noticia['codigo'] ?>">
+						<div class="data-noticia"><?php echo date('d/m/Y H:i:s', strtotime($noticia['data'])) ?></div>
 					</div>
 
 				<?php } ?>
