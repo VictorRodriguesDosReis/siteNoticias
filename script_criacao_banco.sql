@@ -43,6 +43,31 @@ create table tb_comentario (
 			references tb_noticia(cd_noticia)
 );
 
+create table tb_visualizacao_dia (
+	cd_noticia int(5) not null,
+    qt_visualizacao int(5) not null default 1,
+    constraint fk_dia_noticia
+		foreign key (cd_noticia)
+			references tb_noticia(cd_noticia)
+);
+
+create table tb_visualizacao_semana (
+	cd_noticia int(5) not null,
+    qt_visualizacao int(5) not null default 1,
+    constraint fk_semana_noticia
+		foreign key (cd_noticia)
+			references tb_noticia(cd_noticia)
+);
+
+create table tb_visualizacao_mes (
+	cd_noticia int(5) not null,
+    qt_visualizacao int(5) not null default 1,
+    constraint fk_mes_noticia
+		foreign key (cd_noticia)
+			references tb_noticia(cd_noticia)
+);
+
+
 
 
 -- PROCEDURES
@@ -70,6 +95,46 @@ begin
 	insert into tb_comentario(nm_leitor, ds_comentario, cd_noticia)
 		values (nome, comentario, codigoNoticia);
 end $$
+
+
+-- UPDATE
+-- Atualiza a quantidade de visitas feita a notícia
+create procedure p_U_Visualizacao(codigo int(5))
+begin
+	-- Verifica se já existe alguma linha da notícia nas tabelas de visualização
+	set @existeDia = (select count(*) from tb_visualizacao_dia where cd_noticia = codigo);
+    set @existeSemana = (select count(*) from tb_visualizacao_semana where cd_noticia = codigo);
+    set @existeMes = (select count(*) from tb_visualizacao_mes where cd_noticia = codigo);
+    
+    -- Se não existe nenhuma linha ele criará uma com a quantidade de visualizações em 1
+    -- Porém caso já exista apenas será atualizado a quantidade de visualizações acrescentando mais 1
+    -- Será feito isso para as tabelas de visualização de dia, semana e mês
+    if @existeDia = 0 then
+		insert into tb_visualizacao_dia(cd_noticia) values (codigo);
+    else
+		update tb_visualizacao_dia 
+			set qt_visualizacao = qt_visualizacao + 1
+				where cd_noticia = codigo;
+    end if;
+    
+    if @existeSemana = 0 then
+		insert into tb_visualizacao_semana(cd_noticia) values (codigo);
+    else
+		update tb_visualizacao_semana 
+			set qt_visualizacao = qt_visualizacao + 1
+				where cd_noticia = codigo;
+    end if;
+    
+	if @existeMes = 0 then
+		insert into tb_visualizacao_mes(cd_noticia) values (codigo);
+    else
+		update tb_visualizacao_mes 
+			set qt_visualizacao = qt_visualizacao + 1
+				where cd_noticia = codigo;
+    end if;
+    
+end $$
+
 
 -- SELECT
 -- Verifica se existe o usuario no banco
@@ -103,4 +168,58 @@ begin
 			where cd_noticia = codigo;
 end $$
 
+-- Seleciona as 5 notícias mais visualizadas do dia
+create procedure p_S_PrincipaisNoticiasDia()
+begin
+	select n.ds_titulo titulo, n.ds_subtitulo subtitulo, n.cd_noticia codigo
+		from tb_visualizacao_dia vd
+			inner join tb_noticia n on vd.cd_noticia = n.cd_noticia
+				order by vd.qt_visualizacao desc limit 5; 
+end $$
+
+-- Seleciona as 5 notícias mais visualizadas da semana
+create procedure p_S_PrincipaisNoticiasSemana()
+begin
+	select n.ds_titulo titulo, n.ds_subtitulo subtitulo, n.cd_noticia codigo
+		from tb_visualizacao_semana vs
+			inner join tb_noticia n on vs.cd_noticia = n.cd_noticia
+				order by vs.qt_visualizacao desc limit 5; 
+end $$
+
+-- Seleciona as 5 notícias mais visualizadas do mês
+create procedure p_S_PrincipaisNoticiasMes()
+begin
+	select n.ds_titulo titulo, n.ds_subtitulo subtitulo, n.cd_noticia codigo
+		from tb_visualizacao_mes vm
+			inner join tb_noticia n on vm.cd_noticia = n.cd_noticia
+				order by vm.qt_visualizacao desc limit 5; 
+end $$
+
 delimiter ;
+
+
+
+-- EVENTOS
+-- Habilita a criação de evento
+SET @@global.event_scheduler = 1;
+
+-- Todo inicio de dia o evento limpa a tb_visualizacao_dia 
+create event e_limpar_visualizacao_dia
+	on schedule every 1 day
+		starts current_date
+		do
+			truncate db_site_noticia.tb_visualizacao_dia;
+
+-- A cada uma semana (contando do dia da criacao deste evento) ele limpa a tb_visualizacao_semana 
+create event e_limpar_visualizacao_semana
+	on schedule every 1 week
+		starts current_date
+		do
+			truncate db_site_noticia.tb_visualizacao_semana;
+            
+-- A cada um mês (contando do dia da criacao deste evento) ele limpa a tb_visualizacao_mes 
+create event e_limpar_visualizacao_mes
+	on schedule every 1 month
+		starts current_date
+		do
+			truncate db_site_noticia.tb_visualizacao_mes;
