@@ -52,44 +52,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<article class="noticias-destaque">
 					<h3>Principais do Dia</h3>
 					<?php 
-					for ($i = 0; $i < 5; $i++) {
+					if (empty($principaisDia)) {
+						echo '<div class="aviso-sem-noticias">Nenhuma notícia foi visualizada hoje.</div>';
+					}
+					else {
+					foreach ($principaisDia as $noticiaDia) {
 					?>
 					<div>
-						<h5>Lorem ipsum dolor sit amet</h5>
-						<span>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua.
-						</span>
+						<h4><a href="<?php echo base_url().'noticia/'.$noticiaDia['codigo'] ?>"><?php echo $noticiaDia['titulo'] ?></a></h4>
+						<span><?php echo $noticiaDia['subtitulo'] ?></span>
 					</div>
-					<?php } ?>
+					<?php }} ?>
 				</article>
 				<article class="noticias-destaque">
 					<h3>Principais da Semana</h3>
 					<?php 
-					for ($i = 0; $i < 5; $i++) {
+					if (empty($principaisSemana)) {
+						echo '<div class="aviso-sem-noticias">Nenhuma notícia foi visualizada esta semana.</div>';
+					}
+					else {
+					foreach ($principaisSemana as $noticiaSemana) {
 					?>
 					<div>
-						<h5>Lorem ipsum dolor sit amet</h5>
-						<span>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua.
-						</span>
+						<h4><a href="<?php echo base_url().'noticia/'.$noticiaSemana['codigo'] ?>"><?php echo $noticiaSemana['titulo'] ?></a></h4>
+						<span><?php echo $noticiaSemana['subtitulo'] ?></span>
 					</div>
-					<?php } ?>
+					<?php }} ?>
 				</article>
 				<article class="noticias-destaque">
 					<h3>Principais do Mês</h3>
 					<?php 
-					for ($i = 0; $i < 5; $i++) {
+					if (empty($principaisMes)) {
+						echo '<div class="aviso-sem-noticias">Nenhuma notícia foi visualizada este mês.</div>';
+					}
+					else {
+					foreach ($principaisMes as $noticiaMes) {
 					?>
 					<div>
-						<h5>Lorem ipsum dolor sit amet</h5>
-						<span>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua.
-						</span>
+						<h4><a href="<?php echo base_url().'noticia/'.$noticiaMes['codigo'] ?>"><?php echo $noticiaMes['titulo'] ?></a></h4>
+						<span><?php echo $noticiaMes['subtitulo'] ?></span>
 					</div>
-					<?php } ?>
+					<?php }} ?>
 				</article>
 			</aside>
 

@@ -6,6 +6,7 @@ class ModelNoticia extends CI_Model {
 	private $noticiaCompleta = "CALL p_S_NoticiaCompleta(?)";
 	private $comentarios = "CALL p_S_Comentarios(?)";
 	private $insereComentario = "CALL p_I_Comentario(?,?,?)";
+	private $atualizaVisualizacao = "Call p_U_Visualizacao(?)";
 
 	function __construct() {
 		parent::__construct();
@@ -23,12 +24,23 @@ class ModelNoticia extends CI_Model {
 	public function selectComentarios($codigo) {
 		$dado['codigo'] = $codigo;
 		$query = $this->db->query($this->comentarios, $dado);
-		return $query->result_array();
+		$resultado = $query->result_array();
+		$query->next_result();
+  		$query->free_result();
+		return $resultado;
 	}
 
 	public function insertComentario($dados) {
 		$query = $this->db->query($this->insereComentario, $dados);
-		return $query->free_result();
+		$resultado = $query->row_array();
+		$query->next_result();
+  		$query->free_result();
+	}
+
+	public function updateVisualizao($codigo) {
+		$dado['codigoNoticia'] = $codigo;
+		$query = $this->db->query($this->atualizaVisualizacao, $dado);
+  		$query->free_result();
 	}
 }
 

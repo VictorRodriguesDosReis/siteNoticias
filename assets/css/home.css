@@ -84,8 +84,6 @@
 
 .card-noticias h3 a:hover {
 	color: #D43C00;
-	font-weight: bold;
-	text-decoration: none;
 }
 
 .card-noticias .data-noticia {
@@ -123,12 +121,29 @@
 	border-bottom: groove 2px #eee;
 }
 
-.noticias-destaque h5 {
+.noticias-destaque h4 {
 	font-size: 1.2em;
 	font-weight: bold;
+}
+
+.noticias-destaque h4 a {
 	color: #F24500;
+	text-decoration: none;
+	transition: all 0.3s;
+}
+
+.noticias-destaque h4 a:hover {
+	color: #D43C00;
 }
 
 .noticias-destaque span {
 	font-size: 0.9em;
+}
+
+.noticias-destaque .aviso-sem-noticias {
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+	color: #F24500;
+	padding-bottom: 15px;
 }

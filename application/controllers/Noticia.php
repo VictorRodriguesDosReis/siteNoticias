@@ -13,6 +13,8 @@ class Noticia extends CI_Controller {
 		$dados['comentarios'] = $this->modelNoticia->selectComentarios($codigo);
 		$dados['codigo'] = $codigo;
 
+		$this->modelNoticia->updateVisualizao($codigo);
+
 		$this->load->view('templates/headerPadrao');
 		$this->load->view('paginas/noticia', $dados);
 	}

@@ -10,8 +10,12 @@ class Home extends CI_Controller {
 
 	public function index() {
 		$data['onHome'] = "active";
-
-		$noticias['noticiasParciais'] = $this->modelHome->selectNoticiaParcial(0, 10);
+		$noticias = array(
+			'noticiasParciais' => $this->modelHome->selectNoticiaParcial(0, 10),
+			'principaisDia' => $this->modelHome->selectPrincipaisNoticiasDia(),
+			'principaisSemana' => $this->modelHome->selectPrincipaisNoticiasSemana(),
+			'principaisMes' => $this->modelHome->selectPrincipaisNoticiasMes(),
+		);
 
 		$this->load->view('templates/headerPadrao', $data);
 		$this->load->view('paginas/home', $noticias);
