@@ -40,6 +40,25 @@ class Dashboard extends CI_Controller {
 			echo 'error';
 	}
 
+	public function salvarImagem() {
+		if($_FILES)
+		{
+			foreach ($_FILES as $arquivo) {
+
+				$array_name = explode('.', $arquivo["name"]);
+				$extencao = end($array_name);
+				$name = md5(date('Y-m-d').$arquivo["name"].time()). '.' . $extencao;
+				$location = APPPATH.'../assets/img/'. $name;
+				move_uploaded_file($arquivo["tmp_name"], $location);
+			}
+
+			echo json_encode(array('link' => base_url().'assets/img/'. $name));
+		}
+		else {
+			echo "error";
+		}
+	}
+
 	/* Verifica se o usuário está logado */
 	public function verificarLogin() {
 		if(!$this->session->userdata('logado'))

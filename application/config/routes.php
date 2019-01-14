@@ -62,6 +62,7 @@ $route['cadastro/criar-conta'] = 'cadastro/criarConta';
 $route['usuario/dashboard'] = 'dashboard';
 $route['usuario/deslogar'] = 'dashboard/deslogar';
 $route['usuario/dashboard/publicar-noticia'] = 'dashboard/publicarNoticia';
+$route['usuario/dashboard/upload-imagem'] = 'dashboard/salvarImagem';
 
 $route['noticia/(:num)'] = 'noticia/index/$1';
 $route['noticia/publicar-comentario'] = 'noticia/publicaComentario';

@@ -21,7 +21,7 @@
 	height: 350px;
 }
 
-#cria-noticia button {
+#cria-noticia button#submit {
 	background-color: #F24500;
 	color: #fff;
 	text-align: center;
