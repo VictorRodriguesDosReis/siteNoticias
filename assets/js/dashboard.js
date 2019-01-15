@@ -17,6 +17,8 @@ $(document).ready(function() {
         'bold', 'italic', 'underline', 'strikethrought', 'paragraphFormat', 'insertLink', 'insertImage', 'formatOL',
         'formatUL', 'undo', 'redo', 'html'
       ],
+      // Indica ao froala que terá um tema customizado
+      theme: 'custom',
 
       // Remove o botão de quick insert
       quickInsertTags: [''] ,

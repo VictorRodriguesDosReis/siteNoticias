@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="form-group">
 						<label for="noticia">Notícia</label>
-						<textarea name="noticia" id="noticia" class="form-control" placeholder="Digite a notícia aqui..."></textarea>
+						<textarea name="noticia" id="noticia" class="form-control custom-theme" placeholder="Digite a notícia aqui..."></textarea>
 					</div>
 
 					<button type="submit" id='submit' class="btn">Publicar</button>
