@@ -21,7 +21,7 @@ $(document).ready(function() {
       theme: 'custom',
 
       // Remove o botão de quick insert
-      quickInsertTags: [''] ,
+      quickInsertTags: [''],
 
       // Edita os botões dentro do dropdown da Imagem na toolbar
       imageInsertButtons: ['imageUpload', 'imageByURL'],
@@ -48,13 +48,18 @@ $(document).ready(function() {
         // Return false if you want to stop the image upload.
       })
       .on('froalaEditor.image.uploaded', function (e, editor, response) {
-        // Image was uploaded to the server.
+        console.log(e)
+        console.log(editor)
+        console.log(response)
       })
       .on('froalaEditor.image.inserted', function (e, editor, $img, response) {
         // Image was inserted in the editor.
       })
       .on('froalaEditor.image.replaced', function (e, editor, $img, response) {
-        // Image was replaced in the editor.
+        console.log(e)
+        console.log(editor)
+        console.log($img)
+        console.log(response)
       })
       .on('froalaEditor.image.error', function (e, editor, error, response) {
         // Bad link.

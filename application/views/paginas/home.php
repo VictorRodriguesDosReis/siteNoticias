@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets')?>/css/home.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets');?>/css/home.css">
 
 	<div class="container">
 		<section id="principais-noticias">
@@ -37,9 +37,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<section class="row" id="secao-principal">
 			<section class="col-md-7" id="noticias-recentes">
 				<?php 
+					$i = 0;
 					foreach ($noticiasParciais as $noticia) {
+						$i++;
 				?>
-					<div class="card-noticias">
+					<div class="card-noticias" <?php if ($i == 8) echo 'id="load-news"'; ?>>
 						<h3><a href="<?php echo base_url().'noticia/'.$noticia['codigo'] ?>"><?php echo $noticia['titulo'] ?></a></h3>
 						<span><?php echo $noticia['subtitulo'] ?></span>
 						<div class="data-noticia"><?php echo date('d/m/Y H:i:s', strtotime($noticia['data'])) ?></div>
@@ -99,6 +101,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</section>
 	</div>
 	
+	<script type="text/template" data-template="noticias-parciais">
+        <div class="card-noticias" {{id-load}}>
+			<h3><a href="{{url}}"> {{titulo}} </a></h3>
+			<span> {{subtitulo}} </span>
+			<div class="data-noticia"> {{data}} </div>
+		</div>
+    </script>
+	<script type="text/javascript">
+		var baseURL = '<?php echo base_url() ?>';
+		var idUltimaNoticia = <?php echo $noticiasParciais[sizeof($noticiasParciais)-1]['codigo'] ?>;
+	</script>
 	<script type="text/javascript" src="<?php echo base_url('assets')?>/js/home.js"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@ class Home extends CI_Controller {
 	public function index() {
 		$data['onHome'] = "active";
 		$noticias = array(
-			'noticiasParciais' => $this->modelHome->selectNoticiaParcial(0, 10),
+			'noticiasParciais' => $this->modelHome->selectNoticiaParcial(10),
 			'principaisDia' => $this->modelHome->selectPrincipaisNoticiasDia(),
 			'principaisSemana' => $this->modelHome->selectPrincipaisNoticiasSemana(),
 			'principaisMes' => $this->modelHome->selectPrincipaisNoticiasMes(),
@@ -20,4 +20,14 @@ class Home extends CI_Controller {
 		$this->load->view('templates/headerPadrao', $data);
 		$this->load->view('paginas/home', $noticias);
 	}
+
+	public function carregarMaisNoticias() {
+		$ultimaPosicao = $this->input->get('posicao');
+		$noticiasParciais = $this->modelHome->selectNoticiaParcialFiltrado($ultimaPosicao, 10);
+		$i = 0;
+
+		echo json_encode($noticiasParciais);
+	}
 }
+
+?>
