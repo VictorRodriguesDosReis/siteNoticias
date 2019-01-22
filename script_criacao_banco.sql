@@ -144,11 +144,19 @@ begin
 end $$
 
 -- Retorna uma determinada quantidade de notícia iniciando pelo ponto desejado
-create procedure p_S_NoticiaParcial(codigoInicio int(5), quantidade int(5))
+create procedure p_S_NoticiaParcialFiltrado(codigoInicio int(5), quantidade int(5))
 begin
 	select cd_noticia codigo, ds_titulo titulo, ds_subtitulo subtitulo, dt_alteracao data
 		from tb_noticia 
-			where cd_noticia >= codigoInicio order by dt_alteracao desc limit quantidade;
+			where cd_noticia < codigoInicio order by dt_alteracao desc limit quantidade;
+end $$
+
+-- Retorna a quantidade solicitada de notícias mais recentes
+create procedure p_S_NoticiaParcial(quantidade int(5))
+begin
+	select cd_noticia codigo, ds_titulo titulo, ds_subtitulo subtitulo, dt_alteracao data
+		from tb_noticia 
+			where cd_noticia order by dt_alteracao desc limit quantidade;
 end $$
 
 -- Retorna informações da notícia solicitada
