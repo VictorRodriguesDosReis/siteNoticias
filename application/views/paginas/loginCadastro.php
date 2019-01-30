@@ -11,11 +11,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<form id="form-login" method="post">
 					<div class="form-group">
 						<label for="email">E-mail</label>
-						<input type="email" name="email" class="form-control" id="email" placeholder="E-mail" maxlength="254" required>
+						<input type="email" name="email" class="form-control" class="email" placeholder="E-mail" maxlength="254" required>
 					</div>
 					<div class="form-group">
 						<label for="senha">Senha</label>
-						<input type="password" name="senha" class="form-control" id="senha" maxlength="20" placeholder="Senha" required>
+						<input type="password" name="senha" class="form-control" class="senha" maxlength="20" placeholder="Senha" required>
 					</div>
 
 					<button type="submit" class="btn">Entrar</button>
@@ -34,11 +34,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="form-group">
 						<label for="email">E-mail</label>
-						<input type="email" name="email" class="form-control" id="email" placeholder="E-mail" maxlength="254" required>
+						<input type="email" name="email" class="form-control" class="email" placeholder="E-mail" maxlength="254" required>
 					</div>
 					<div class="form-group">
 						<label for="senha">Senha</label>
-						<input type="password" name="senha" class="form-control" id="senha" placeholder="Senha" maxlength="20" required>
+						<input type="password" name="senha" class="form-control" class="senha" placeholder="Senha" maxlength="20" required>
 					</div>
 					<div class="form-group">
 						<label for="confirma-senha">Confirmar senha</label>
@@ -53,8 +53,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</section>
 	
-
+	
 	<script type="text/javascript">
 		var baseURL = '<?php echo base_url() ?>';
 	</script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets')?>/js/loginCadastro.js"></script>

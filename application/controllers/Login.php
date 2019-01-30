@@ -36,6 +36,8 @@ class Login extends CI_Controller {
 
 				echo 'success';
 			}
+
+			echo 'error';
 		}
 		else {
 			echo 'error';
