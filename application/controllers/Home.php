@@ -24,7 +24,9 @@ class Home extends CI_Controller {
 	public function carregarMaisNoticias() {
 		$ultimaPosicao = $this->input->get('posicao');
 		$noticiasParciais = $this->modelHome->selectNoticiaParcialFiltrado($ultimaPosicao, 10);
-		$i = 0;
+
+		for ($i=0; $i < sizeof($noticiasParciais); $i++)
+			$noticiasParciais[$i]['data'] = date('d/m/Y H:i:s', strtotime($noticiasParciais[$i]['data']));
 
 		echo json_encode($noticiasParciais);
 	}
