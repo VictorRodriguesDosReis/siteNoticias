@@ -9,15 +9,22 @@ class Home extends CI_Controller {
 	}
 
 	public function index() {
-		$data['onHome'] = "active";
+		$data['onHome'] = true;
 		$noticias = array(
 			'noticiasParciais' => $this->modelHome->selectNoticiaParcial(10),
-			'principaisDia' => $this->modelHome->selectPrincipaisNoticiasDia(),
-			'principaisSemana' => $this->modelHome->selectPrincipaisNoticiasSemana(),
-			'principaisMes' => $this->modelHome->selectPrincipaisNoticiasMes(),
+			'principaisDia' => $this->modelHome->selectPrincipaisNoticiasDia(5),
+			'principaisSemana' => $this->modelHome->selectPrincipaisNoticiasSemana(5),
+			'principaisMes' => $this->modelHome->selectPrincipaisNoticiasMes(5),
+			'principaisComImagem' => $this->modelHome->selectPrincipaisComImagem(3)
 		);
 
-		$this->load->view('templates/headerPadrao', $data);
+		if ($this->session->userdata('logado')) {
+			$data['nomeUsuario'] = $this->session->userdata('nome');
+			$this->load->view('templates/headerLogado', $data);
+		}
+		else
+			$this->load->view('templates/headerPadrao', $data);
+		
 		$this->load->view('paginas/home', $noticias);
 	}
 
