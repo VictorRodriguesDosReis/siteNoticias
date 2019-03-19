@@ -34,7 +34,10 @@ class Cadastro extends CI_Controller {
 						'email' => $this->input->post('email'),
 						'logado' => true
 					);
-					$this->session->set_userdata($data);
+
+				$this->session->set_userdata($data);
+
+				mkdir(APPPATH.'../assets/img/'.$data['codigo']);
 
 				echo 'success';
 			}
