@@ -23,10 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				
 				<div class="collapse navbar-collapse links-menu" id="link-esquerda">
 					<ul class="navbar-nav">
-						<li class="nav-item">
+						<li class="nav-item <?php if (isset($onHome)) echo 'active' ?>">
 							<a href="<?php echo base_url()?>home" class="nav-link">Home</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item <?php if (isset($onNoticia)) echo 'active' ?>">
 							<a href="#" class="nav-link">Notícia</a>
 						</li>
 					</ul>
@@ -39,10 +39,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="collapse navbar-collapse links-menu" id="link-direita">
 					<ul class="navbar-nav">
 						<li class="nav-item">
-							<a href="#" class="nav-link"><?php echo $nomeUsuario ?></a>
+							<a href="<?php echo base_url()?>usuario/dashboard?>" class="nav-link"><?php echo $nomeUsuario ?></a>
 						</li>
 						<li class="nav-item">
-							<a href="<?php echo base_url()?>usuario/deslogar" class="nav-link">Sair</a>
+							<a href="<?php echo base_url()?>usuario/deslogar?>" class="nav-link">Sair</a>
 						</li>
 					</ul>
 				</div>
