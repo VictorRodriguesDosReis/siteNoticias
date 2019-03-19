@@ -9,13 +9,20 @@ class Noticia extends CI_Controller {
 	}
 
 	public function index($codigo) {
+		$dados['onNoticia'] = true;
 		$dados['noticia'] = $this->modelNoticia->selectNoticia($codigo);
 		$dados['comentarios'] = $this->modelNoticia->selectComentarios($codigo);
+		$dados['noticiasRecentes'] = $this->modelNoticia->selectNoticiasRecentes(5);
 		$dados['codigo'] = $codigo;
 
 		$this->modelNoticia->updateVisualizao($codigo);
 
-		$this->load->view('templates/headerPadrao');
+		if ($this->session->userdata('logado')) {
+			$dados['nomeUsuario'] = $this->session->userdata('nome');
+			$this->load->view('templates/headerLogado', $dados);
+		}
+		else
+			$this->load->view('templates/headerPadrao', $dados);
 		$this->load->view('paginas/noticia', $dados);
 	}
 
@@ -25,9 +32,11 @@ class Noticia extends CI_Controller {
 		$this->form_validation->set_rules('codigo', 'Código da Notícia', 'trim|required|min_length[1]|max_length[5]|integer');
 
 		if ($this->form_validation->run()) {
-			$this->modelNoticia->insertComentario($this->input->post());
+			$comentarioInserido = $this->modelNoticia->insertComentario($this->input->post());
 
-			echo 'success';
+			$comentarioInserido['dataCriacao'] = date('d/m/Y H:i:s', strtotime($comentarioInserido['dataCriacao']));
+
+			echo json_encode($comentarioInserido);
 
 		} else {
 			echo 'error';
