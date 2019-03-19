@@ -1,0 +1,37 @@
+h2 {
+	color: #F24500;
+	text-align: center;
+	margin: 35px auto;
+}
+
+#cria-noticia {
+	margin: auto;
+	display: block;
+}
+
+#cria-noticia label {
+	color: #F24500;
+	font-weight: bold;
+	margin-bottom: 0px;
+}
+
+#cria-noticia input, #cria-noticia textarea {
+	border-color: #A62F00;
+}
+
+#cria-noticia input::placeholder, #cria-noticia textarea::placeholder {
+	color: #F27949;
+}
+
+#cria-noticia button#submit {
+	background-color: #F24500;
+	color: #fff;
+	text-align: center;
+	width: 100%;
+	transition: all 0.5s;
+}
+
+#cria-noticia button:hover {
+	box-shadow: 1px 1px 4px #000a;
+	text-shadow: 1px 1px 2px #0006;
+}

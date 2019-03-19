@@ -48,6 +48,15 @@ header {
 	text-indent: 15px;
 }
 
+#noticia a {
+	color: #F24500;
+	transition: color 0.5s;
+}
+
+#noticia a:hover, #noticia a:visited {
+	color: #A62F00;
+}
+
 #noticia figure {
 	margin: 15px 0;
 }
@@ -69,7 +78,6 @@ header {
 	box-shadow: 1px 1px 5px #bbb;
 	margin: 10px 0 10px 0;
 	overflow: auto;
-	cursor: pointer;
 	transition: all 0.5s;
 }
 
@@ -84,14 +92,18 @@ header {
 	height: 105px;
 }
 
-.noticias-destaque h3 {
-	color: #F24500;
+.noticias-destaque h3 {;
 	font-size: 1.1em;
 	margin: 7px 0;
+}
+
+.noticias-destaque a {
+	color: #F24500;
+	text-decoration: none;
 	transition: all 0.5s;
 }
 
-.noticias-destaque:hover h3 {
+.noticias-destaque:hover a {
 	color: #A62F00;
 }
 
