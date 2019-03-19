@@ -26,10 +26,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</article>
 		<aside class="col-md-4">
-			<?php for ($i=0; $i < 5; $i++) { ?>
+			<?php foreach ($noticiasRecentes as $noticia) { ?>
 				<div class="noticias-destaque">
-					<img src="https://picsum.photos/200/200/?random">
-					<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</h3>
+					<img src="<?php echo $noticia['imagem']?>">
+					<h3><a href="<?php echo base_url().'noticia/'.$noticia['codigo'] ?>">
+						<?php echo $noticia['titulo'] ?>
+					</a></h3>
 				</div>
 			<?php } ?>
 		</aside>
@@ -56,7 +58,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</form>
 			
 			<hr>
-
+			
+			<div class="todos-comentarios">
 			<?php foreach ($comentarios as $comentario) { ?>
 				<div class="comentarios">
 					<p class="autor-comentario"><?php echo $comentario['leitor']; ?></p>
@@ -64,6 +67,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<p class="texto-comentario"><?php echo $comentario['comentario']; ?></p>
 				</div>
 			<?php } ?>
+			</div>
 
 		</div>
 	</div>
@@ -71,5 +75,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <script type="text/javascript">
 	var baseURL = '<?php echo base_url() ?>';
+</script>
+<script type="text/template" data-template="comentario">
+    <div class="comentarios">
+		<p class="autor-comentario">{{nomeLeitor}}</p>
+		<p class="data-comentario">{{dataCriacao}}</p>
+		<p class="texto-comentario">{{comentario}}</p>
+	</div>
 </script>
 <script type="text/javascript" src="<?php echo base_url('assets')?>/js/noticia.js"></script>
