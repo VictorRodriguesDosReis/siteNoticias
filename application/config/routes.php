@@ -63,8 +63,14 @@ $route['cadastro/criar-conta'] = 'cadastro/criarConta';
 
 $route['usuario/deslogar'] = 'dashboard/deslogar';
 $route['usuario/dashboard'] = 'dashboard';
+$route['usuario/nova-noticia'] = 'dashboard/novaNoticia';
+$route['usuario/dashboard/editar-noticia'] = 'dashboard/editarNoticia';
+$route['usuario/dashboard/remover-noticia'] = 'dashboard/excluirNoticia';
 $route['usuario/dashboard/publicar-noticia'] = 'dashboard/publicarNoticia';
 $route['usuario/dashboard/upload-imagem'] = 'dashboard/salvarImagem';
+$route['usuario/dashboard/carregar-imagens'] = 'dashboard/carregarImagens';
+$route['usuario/dashboard/deletar-imagem'] = 'dashboard/deletarImagem';
+$route['usuario/dashboard/informacoes-noticia'] = 'dashboard/dadosNoticia';
 
 $route['noticia/(:num)'] = 'noticia/index/$1';
 $route['noticia/publicar-comentario'] = 'noticia/publicaComentario';
