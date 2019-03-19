@@ -9,8 +9,6 @@ $(document).ready(function() {
 		var senha = $('#form-cadastro input[name=senha]').val();
 		var senha_confirma = $('#form-cadastro input[name=confirma-senha]').val();
 
-		console.log(senha, senha_confirma);
-
 		if (senha != senha_confirma) {
 			swal({
 				title: 'Senhas estão diferentes',
