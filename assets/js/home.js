@@ -1,21 +1,4 @@
 $(document).ready(function() {
-	var templateNoticias = $('script[data-template="noticias-parciais"]').html();
-	
-	$('#principais-noticias > div > div').hover(
-		function() {
-			$(this).animate({
-				backgroundSize: "130%"
-			}, 450);
-			$(this).clearQueue();
-
-		},
-		function() {
-			$(this).animate({
-				backgroundSize: "100%"
-			}, 450);
-			$(this).clearQueue();
-
-		});
 
 	$(window).scroll(function() {
 		var hT = $('#load-news').offset().top,
@@ -30,6 +13,7 @@ $(document).ready(function() {
 
 	function carregarNoticiasRecentes() {
 		$.get(baseURL+'carregar-mais-noticias', {posicao: idUltimaNoticia}, function(noticias){
+			var templateNoticias = $('script[data-template="noticias-parciais"]').html();
 			var lengthNoticias = noticias.length-1;
 			idUltimaNoticia = noticias[lengthNoticias].codigo;
 			noticias = JSON.parse(noticias);
