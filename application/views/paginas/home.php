@@ -5,33 +5,52 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<div class="container">
 		<section id="principais-noticias">
-			<div class="col-md-12">
-				<div id="noticia-principal" style="background-image: url('https://picsum.photos/1000/1000/?random')">
-					<div class="descricao-noticia">
-					<h1>Lorem ipsum dolor sit amet, consectetur</h1>
-					<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua.</span>
+			<?php 
+				$i = 0;
+
+				if (sizeof($principaisComImagem) >= 3) {
+					foreach ($principaisComImagem as $noticiaComImagem) {
+						$i++;
+
+						if ($i == 1) {
+			?>
+
+					<div class="col-md-12">
+						<div id="noticia-principal" style="background-image: url('<?php echo $noticiaComImagem['imagem'] ?>')">
+							<div class="descricao-noticia">
+							<h1>
+								<a href="<?php echo base_url().'noticia/'.$noticiaComImagem['codigo'] ?>">
+									<?php echo $noticiaComImagem['titulo'] ?>
+								</a>
+							</h1>
+							<span><?php echo $noticiaComImagem['subtitulo'] ?></span>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="noticia-sub-principal" style="background-image: url('https://picsum.photos/900/900/?random')">
-					<div class="descricao-noticia">
-					<h1>Lorem ipsum dolor sit amet, consectetur</h1>
-					<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua.</span>
+
+			<?php
+						}
+						else {
+			?>
+				
+					<div class="col-md-12">
+						<div class="noticia-sub-principal" style="background-image: url('<?php echo $noticiaComImagem['imagem'] ?>')">
+							<div class="descricao-noticia">
+							<h1>
+								<a href="<?php echo base_url().'noticia/'.$noticiaComImagem['codigo'] ?>">
+									<?php echo $noticiaComImagem['titulo'] ?>
+								</a>
+							</h1>
+							<span><?php echo $noticiaComImagem['subtitulo'] ?></span>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="noticia-sub-principal" style="background-image: url('https://picsum.photos/800/800/?random')">
-					<div class="descricao-noticia">
-					<h1>Lorem ipsum dolor sit amet, consectetur</h1>
-					<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua.</span>
-					</div>
-				</div>
-			</div>
+
+			<?php 
+						}
+					}
+				}
+			?>
 		</section>
 		
 		<section class="row" id="secao-principal">
