@@ -33,6 +33,7 @@ class Dashboard extends CI_Controller {
 		$this->form_validation->set_rules('titulo', 'Título', 'trim|required|min_length[10]|max_length[100]');
 		$this->form_validation->set_rules('subtitulo', 'Subtítulo', 'trim|min_length[10]|max_length[250]');
 		$this->form_validation->set_rules('noticia', 'Notícia', 'trim|required|min_length[10]');
+		$this->form_validation->set_rules('imagemCapa', 'Subtítulo', 'trim|valid_url');
 		$this->form_validation->set_rules('codigo-noticia', 'Código da notícia', 'trim|required|integer');
 
 		if($this->form_validation->run()) {
@@ -40,6 +41,7 @@ class Dashboard extends CI_Controller {
 				'titulo' => html_purify($this->input->post('titulo')),
 				'subtitulo' => html_purify($this->input->post('subtitulo')),
 				'noticia' => $this->input->post('noticia'),
+				'imagemCapa' => $this->input->post('imagem-capa'),
 				'codigo-usuario' => $this->session->userdata('codigo'),
 				'codigo-noticia' => $this->input->post('codigo-noticia'),
 			);
@@ -71,24 +73,21 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function publicarNoticia() {
-		$arrayImagensNoticia = explode(',', $this->input->post('imagens'));
-
 		$this->form_validation->set_rules('titulo', 'Título', 'trim|required|min_length[10]|max_length[100]');
 		$this->form_validation->set_rules('subtitulo', 'Subtítulo', 'trim|min_length[10]|max_length[250]');
 		$this->form_validation->set_rules('noticia', 'Noticia', 'trim|required|min_length[10]');
+		$this->form_validation->set_rules('imagemCapa', 'Subtítulo', 'trim|valid_url');
 
 		if($this->form_validation->run()) {
 			$data = array(
 				'titulo' => html_purify($this->input->post('titulo')),
 				'subtitulo' => html_purify($this->input->post('subtitulo')),
 				'noticia' => $this->input->post('noticia'),
+				'imagemCapa' => $this->input->post('imagem-capa'),
 				'codigo' => $this->session->userdata('codigo'),
 			);
 
 			$codigoNoticia = $this->modelDashboard->insertNoticia($data);
-
-			if (!empty($arrayImagensNoticia[0]))
-				$this->modelDashboard->insertImagensNoticia($arrayImagensNoticia, $codigoNoticia['codigo']);
 
 			echo 'success';	
 
@@ -124,33 +123,11 @@ class Dashboard extends CI_Controller {
 			}
 
 			echo json_encode(array('link' => base_url().'assets/img/'.$codigoUsuario.'/'.$nome));
-			// header('Content-Type: '.$arquivo['type']);
-			// readfile($arquivo["tmp_name"]);
-			// base_url();
-
-			// $type = $arquivo['type'];
-			// $data = file_get_contents($arquivo['tmp_name']);
-			// echo json_encode(array('link' => 'data:image/' . $type . ';base64,' . base64_encode($data)));
 		}
 		else {
 			echo "error";
 		}
 	}
-
-	// public function criarImagem($imagemEmBase64) {
-	// 	$nomeImagem = md5(date('Y-m-d').time()). '.png';
-	// 	$caminhoImagem = APPPATH.'../assets/img/'. $nomeImagem;
-
-	// 	$imagemEmCriacao = fopen($caminhoImagem, 'wb'); 
-
-	//     // we could add validation here with ensuring count( $data ) > 1
-	//     fwrite($imagemEmCriacao, base64_decode($imagemEmBase64));
-
-	//     // clean up the file resource
-	//     fclose($imagemEmCriacao); 
-
-	//     return $caminhoImagem;
-	// }
 
 	/* Carrega as imagens que o usuário tem na pasta */
 	public function carregarImagens() {

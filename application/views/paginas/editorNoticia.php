@@ -5,8 +5,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
     <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets')?>/css/editorNoticia.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets')?>/css/froalaEditor.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets')?>/css/slickCarousel.css">
 
 	<div class="container">
 		<div class="row">
@@ -26,6 +29,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<label for="noticia">Notícia</label>
 						<textarea name="noticia" id="noticia" class="form-control custom-theme" placeholder="Digite a notícia aqui..." value="<?php if (isset($noticia)) echo $noticia['titulo'];?>"></textarea>
 					</div>
+					<div class="form-group">
+						<label>Imagem de Capa</label>
+						<div id="carrossel-imagens">
+						</div>
+						<input type="hidden" name="imagem-capa">
+					</div>
 
 					<button type="submit" id='submit' class="btn">Publicar</button>
 				</form>
@@ -40,7 +49,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets')?>/js/editorNoticia.js"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets')?>/js/froalaEditor.js"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets')?>/js/slickCarousel.js"></script>
 </body>
 </html>

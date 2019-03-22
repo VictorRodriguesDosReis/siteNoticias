@@ -33,7 +33,42 @@ $(document).ready(function() {
 
       // Allow to upload PNG and JPG.
       imageAllowedTypes: ['jpeg', 'jpg', 'png']
-    }).on('froalaEditor.image.error', function (e, editor, error, response) {
+    })
+
+    $('#noticia').on('froalaEditor.image.inserted', function (e, editor, $img, response) {
+      const urlImagemInserida = $img[0].src;
+
+      if (verificaQuantidadeImagem(urlImagemInserida) == 1)
+        adicionaImagemCarrossel(urlImagemInserida);
+
+    })
+    .on('froalaEditor.image.replaced', function (e, editor, $img, response) {
+      const imagemAntiga = $img['prevObject'][0].src;
+      const imagemNova = $img[0].src;
+
+      if (verificaQuantidadeImagem(imagemAntiga) == 0) {
+        if (verificaQuantidadeImagem(imagemNova) == 1)
+          trocarImagemCarrossel(imagemAntiga, imagemNova);
+
+        else
+          removerSlideCarrossel(imagemAntiga);
+        
+      }
+
+      else {
+        if (verificaQuantidadeImagem(imagemNova) == 1) 
+          adicionaImagemCarrossel(imagemNova);
+
+      }
+
+    })
+    .on('froalaEditor.image.beforeRemove', function (e, editor, $img) {
+      const urlImagemSeraRemovida = $img[0].src;
+      if (verificaQuantidadeImagem(urlImagemSeraRemovida) == 1)
+        removerSlideCarrossel(urlImagemSeraRemovida);
+
+    })
+    .on('froalaEditor.image.error', function (e, editor, error, response) {
         // Bad link.
         /*if (error.code == 1) { ... }
  
@@ -57,4 +92,15 @@ $(document).ready(function() {
  
           // Response contains the original server response to the request if available;*/
       });
-});
+
+    function verificaQuantidadeImagem(urlImagem) {
+      const expressaoRegular = new RegExp(urlImagem, "g")
+      const ocorrenciasImagem = $('.fr-element').html().match(expressaoRegular);
+
+      if (ocorrenciasImagem != null)
+        return ocorrenciasImagem.length;
+
+      else
+        return 0;
+    }
+  });

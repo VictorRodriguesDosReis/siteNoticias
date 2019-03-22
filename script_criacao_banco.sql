@@ -94,18 +94,21 @@ end $$
 
 -- Insere uma nova noticia ao banco
 create procedure p_I_Noticia(titulo varchar(100), subtitulo varchar(250), 
-	noticia longtext, codigoUsuario int(2))
+	noticia longtext, caminhoImagem varchar(100), codigoUsuario int(2))
 begin
 	insert into tb_noticia (ds_titulo, ds_subtitulo, ds_noticia, dt_criacao, cd_autor) 
 		values (titulo, subtitulo, noticia, now(), codigoUsuario);
-	select last_insert_id() as codigo;
-end $$
+	
+    -- Verifica se tem imagem de capa para a notícia
+    if caminhoImagem <> '' then
+		set @codigoNoticia = last_insert_id();
 
--- Insere as imagens que contém na notícia
-create procedure p_I_Imagem(caminho varchar(100), codigoNoticia int(5))
-begin
-	insert into tb_imagem(ds_caminho, cd_noticia) 
-		values (caminho, codigoNoticia);
+		insert into tb_imagem(ds_caminho, cd_noticia) 
+			values (caminhoImagem, @codigoNoticia);
+            
+	end if;
+
+	select @codigoNoticia as codigo;
 end $$
 
 -- Insere um novo comentário no banco
@@ -160,12 +163,30 @@ end $$
 
 -- Atualiza as informações da notícia
 create procedure p_U_Noticia(titulo varchar(100), subtitulo varchar(250), 
-	noticia longtext, codigoUsuario int(2), codigoNoticia int(5))
+	noticia longtext, caminhoImagem varchar(100), codigoUsuario int(2), codigoNoticia int(5))
 begin
 	update tb_noticia 
 		set ds_titulo = titulo, ds_subtitulo = subtitulo,
 			ds_noticia = noticia
 				where cd_autor = codigoUsuario and cd_noticia = codigoNoticia;
+                
+	-- Verifica se tem uma nova imagem de capa para a notícia
+    if caminhoImagem <> '' then
+		set@temImagemCapa = (select count(*) from tb_imagem where cd_noticia = codigoNoticia);
+        
+        -- Verifica se já existe imagem de capa
+		if (@temImagemCapa = 0) then
+			insert into tb_imagem(cd_noticia, ds_caminho)
+				values(codigoNoticia, caminhoImagem);
+		
+        else
+			update tb_imagem 
+				set ds_caminho = caminhoImagem, cd_noticia = codigoNoticia
+					where cd_noticia = codigoNoticia;
+                
+		end if;
+            
+	end if;
                 
 	select ds_titulo titulo, ds_subtitulo subtitulo, dt_alteracao dataEdicao
 		from tb_noticia 
@@ -236,9 +257,10 @@ end $$
 -- Retorna informações da notícia solicitada pelo autor
 create procedure p_S_NoticiaCompletaAutor(codigoNoticia int(5), codigoAutor int(2))
 begin
-	select cd_noticia codigo, ds_titulo titulo, ds_subtitulo subtitulo, ds_noticia noticia
-		from tb_noticia 
-			where cd_autor = codigoAutor and cd_noticia = codigoNoticia and ic_ativo = 1;
+	select n.cd_noticia codigo, n.ds_titulo titulo, n.ds_subtitulo subtitulo, n.ds_noticia noticia, i.ds_caminho imagemCapa
+		from tb_noticia n inner join tb_imagem i 
+			on n.cd_noticia = i.cd_noticia
+				where n.cd_autor = codigoAutor and n.cd_noticia = codigoNoticia and ic_ativo = 1;
 end $$
 
 -- Retorna os comentários da notícia solicitada

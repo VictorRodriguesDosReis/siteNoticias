@@ -1,0 +1,19 @@
+#carrossel-imagens img {
+	width: 100%;
+	height: 190px;
+	height: 190px;
+	padding: 10px;
+	opacity: 0.5;
+	transition: all 0.5s;
+}
+
+#carrossel-imagens .slick-current img {
+	padding: 0;
+	opacity: 1;
+	border: solid 3px #F24500;
+}
+
+#carrossel-imagens button:before {
+	text-shadow: 1px 1px 3px #0005;
+	color: #F24500;
+}

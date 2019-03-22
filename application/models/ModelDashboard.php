@@ -3,13 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ModelDashboard extends CI_Model {
 
-	private $insertNoticia = "CALL p_I_Noticia(?,?,?,?)";
+	private $insertNoticia = "CALL p_I_Noticia(?,?,?,?,?)";
 	private $selectNoticiaParcial = "CALL p_S_NoticiaParcialAutor(?,?)";
 	private $selectNoticiaFiltrado = "CALL p_S_NoticiaParcialFiltradoAutor(?,?,?)";
 	private $selectNoticiaCompleta = "CALL p_S_NoticiaCompletaAutor(?,?)";
-	private $updateNoticia = "CALL p_U_Noticia(?,?,?,?,?)";
+	private $updateNoticia = "CALL p_U_Noticia(?,?,?,?,?,?)";
 	private $deleteNoticia = "CALL p_U_DesativaNoticia(?,?)";
-	private $insertImagensNoticia = "CALL p_I_Imagem(?,?)";
 
 	function __construct() {
 		parent::__construct();
@@ -58,20 +57,6 @@ class ModelDashboard extends CI_Model {
 	public function deleteNoticia($dados) {
 		$query = $this->db->query($this->deleteNoticia, $dados);
   		$query->free_result();
-	}
-
-	public function insertImagensNoticia($imagens, $codigoNoticia) {
-		foreach ($imagens as $imagem) {
-			$dados = array(
-				'urlImagem' => $imagem,
-				'codigoNoticia' => $codigoNoticia
-			);
-
-			$query = $this->db->query($this->insertImagensNoticia, $dados);
-	  		$query->free_result();
-			
-		}
-
 	}
 }
 

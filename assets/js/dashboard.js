@@ -1,89 +1,129 @@
 $(document).ready(function() {
+	var elementoAtual = null;
+	var imagensDeletadas = [];
+	var novasImagens = [];
+	var imagensTrocadas = [];
 
-	$("#form-noticia").submit(function(event) {
-		event.preventDefault();
+	$(".btn-editar").click(function() {
+		elementoAtual = $(this).closest(".card-noticias");
+		codigo_noticia = elementoAtual.find("input[type='hidden']").val();
 
-		var dados = $('#form-noticia').serialize();
-		$.post(baseURL+'usuario/dashboard/publicar-noticia', dados, function(resultado) {
-			if (resultado == 'error')
-				apresentaMenssagem('erroCadastro');
-			else if (resultado == 'success')
-				alert('Noticia publicada com sucesso!')
+		$.get(baseURL+"usuario/dashboard/informacoes-noticia", {codigo: codigo_noticia}, function(resultado) {
+
+			if (resultado == "Usuário não autorizado")
+				print('');
+
+			else {
+				dados = JSON.parse(resultado);
+
+				abrirModalEdicaoPreenchido(dados);				
+			}
+		})
+	});
+
+	$('.btn-excluir').click(function() {
+		codigo_noticia = $(this).closest(".card-noticias").find("input[type='hidden']").val();
+
+		swal({
+			title: 'Confirmar exclusão',
+			text: 'Você realmente deseja excluir essa notícia permanentemente ?',
+			icon: 'warning',
+			buttons: {
+				Sim: {
+					text: 'Sim',
+					value: true
+				},
+				Nao: {
+					text: 'Não',
+					value: false
+				},
+			}
+		}).then((fazerExclusao) => {
+			var cardNoticia = $(this).closest('.card-noticias');
+
+			if (fazerExclusao) {
+				$.post(baseURL+'usuario/dashboard/remover-noticia', {codigo: codigo_noticia}, function(resultado) {
+					if (resultado == 'success') {
+						swal({
+							title: 'Exclusão Realizada',
+							text: 'A notícia selecionada foi excluida com sucesso',
+							icon: 'success',
+							button: 'Ok'
+						});
+
+						cardNoticia.remove();
+
+					}
+					else if (resultado == 'error') {
+						swal({
+							title: 'Erro na exclusão',
+							text: 'Não foi possivel realizar a exclusão, por favor tente novamente',
+							icon: 'warning',
+							button: 'Ok'
+						});
+					}
+
+				});
+			}
 		});
 	});
- 
-    $('#noticia').froalaEditor({
-      toolbarButtons: [
-        'bold', 'italic', 'underline', 'strikethrought', 'paragraphFormat', 'insertLink', 'insertImage', 'formatOL',
-        'formatUL', 'undo', 'redo', 'html'
-      ],
-      // Indica ao froala que terá um tema customizado
-      theme: 'custom',
 
-      // Remove o botão de quick insert
-      quickInsertTags: [''],
+	$("#form-edita-noticia").submit(function(event) {
+		event.preventDefault();
 
-      // Edita os botões dentro do dropdown da Imagem na toolbar
-      imageInsertButtons: ['imageUpload', 'imageByURL'],
+		var dados = $('#form-edita-noticia').serialize();
 
-      // Set the image upload parameter.
-      imageUploadParam: 'image',
+		$.post(baseURL+'usuario/dashboard/editar-noticia', dados, function(resultado) {
+			if (resultado == 'error')
+				swal({
+					title: 'Erro na edição',
+					text: 'Não foi possivel realizar a modificação, por favor tente novamente',
+					icon: 'warning',
+					button: 'Ok'
+				});
 
-      // Set the image upload URL.
-      imageUploadURL: baseURL+'usuario/dashboard/upload-imagem',
+			else {
+				const novosDados = JSON.parse(resultado);
+				atualizarNoticia(novosDados);
 
-      // Additional upload params.
-      imageUploadParams: {id: 1},
+				$('#modal-editar').modal('hide');
 
-      // Set request type.
-      imageUploadMethod: 'POST',
+				swal({
+					title: 'Modificação realizada',
+					text: 'Edição realizada com sucesso !',
+					icon: 'success',
+					button: 'Ok'
+				});
+			}
+		});
+	});
 
-      // Set max image size to 5MB.
-      imageMaxSize: 5 * 1024 * 1024,
+	function abrirModalEdicaoPreenchido(dados) {
+		$("#titulo").val(dados['titulo']);
+		$("#subtitulo").val(dados['subtitulo']);
+		$("#noticia").val(dados['noticia']);
+		$("#codigo-noticia").val(codigo_noticia);
+		$('#noticia').froalaEditor('html.set', dados['noticia']);
 
-      // Allow to upload PNG and JPG.
-      imageAllowedTypes: ['jpeg', 'jpg', 'png']
-    })
-    .on('froalaEditor.image.beforeUpload', function (e, editor, images) {
-        // Return false if you want to stop the image upload.
-      })
-      .on('froalaEditor.image.uploaded', function (e, editor, response) {
-        console.log(e)
-        console.log(editor)
-        console.log(response)
-      })
-      .on('froalaEditor.image.inserted', function (e, editor, $img, response) {
-        // Image was inserted in the editor.
-      })
-      .on('froalaEditor.image.replaced', function (e, editor, $img, response) {
-        console.log(e)
-        console.log(editor)
-        console.log($img)
-        console.log(response)
-      })
-      .on('froalaEditor.image.error', function (e, editor, error, response) {
-        // Bad link.
-        /*if (error.code == 1) { ... }
- 
-        // No link in upload response.
-        else if (error.code == 2) { ... }
- 
-        // Error during image upload.
-        else if (error.code == 3) { ... }
- 
-        // Parsing response failed.
-        else if (error.code == 4) { ... }
- 
-        // Image too text-large.
-        else if (error.code == 5) { ... }
- 
-        // Invalid image type.
-        else if (error.code == 6) { ... }
- 
-        // Image can be uploaded only to same domain in IE 8 and IE 9.
-        else if (error.code == 7) { ... }
- 
-        // Response contains the original server response to the request if available;*/
-      });
+		$('#modal-editar').modal('show');
 
+		const imagensNoticia = $(".fr-view img");
+		removerTodosSlidesCarrossel();
+
+		for (const imagem of imagensNoticia)
+			adicionaImagemCarrossel($(imagem).attr('src'));
+
+		// Se chamar apenas a função sem usar esse delay de 1s a função não funciona corretamente
+		setTimeout(submeterComoSlideAtual, 1000, dados['imagemCapa']);
+	}
+
+	function atualizarNoticia(dados) {
+		const titulo = dados['titulo'];
+		const subtitulo = dados['subtitulo'];
+		const data = dados['dataEdicao'];
+
+		elementoAtual.find('.titulo a').text(titulo);
+		elementoAtual.find('.subtitulo').text(subtitulo);
+		elementoAtual.find('.data-noticia').text(data);
+	}
 });
