@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</ul>
 				</div>
 
-				<a class="navbar-brand" href="">
+				<a class="navbar-brand" href="<?php echo base_url()?>home">
 					Web News
 				</a>
 
