@@ -23,6 +23,19 @@ h2 {
 	color: #F27949;
 }
 
+#cria-noticia textarea#noticia {
+	display: block !important;
+	padding: 0;
+	border: 0;
+	width: 0;
+	height: 0;
+}
+
+#cria-noticia .aviso .error {
+	color: #F20000;
+	text-decoration: underline;
+}
+
 #cria-noticia button#submit {
 	background-color: #F24500;
 	color: #fff;

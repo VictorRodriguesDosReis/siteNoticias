@@ -1,4 +1,121 @@
-$(document).ready(function() {
+$(document).ready(function() {	
+	// Validação dos campos do formulário
+	var validator = $("#form-adiciona-noticia, #form-edita-noticia").validate({
+		errorPlacement: function(error, element){
+			element.next('.aviso').html(error);
+		},
+		submitHandler: function(form){
+			var formId = $(form).attr('id');
+
+			if (formId == 'form-adiciona-noticia')
+				enviarFormularioAdiciona()
+
+			if (formId == 'form-edita-noticia')
+				enviarFormularioEdita()
+
+		},
+		rules: {
+			titulo: {
+				required:true,
+				minlength: 10,
+				maxlength: 100        
+			},
+			subtitulo: {
+				minlength: 10,
+				maxlength: 250     
+			},
+			noticia: {
+				required: true,
+				minlengthwithoutHTML: 10
+			}
+		},
+		messages:{
+			titulo: {
+				required: "O título não pode ser vazio",
+				maxlength: "O título deve ter no máximo 100 caracteres",
+				minlength: "O título deve ter no mínimo 10 caracteres"
+			},
+			subtitulo: {
+				maxlength: "O subtítulo deve ter no máximo 250 caracteres",
+				minlength: "O subtítulo deve ter no mínimo 10 caracteres"
+			},
+			noticia: {
+				required:"A notícia não pode ser vazio",
+				minlengthwithoutHTML: "A notícia deve ter no mínimo 10 caracteres"
+			}
+		}	
+	});
+
+	$.validator.addMethod("minlengthwithoutHTML", function(value, element, param) {
+		return $(value).text().length >= param;
+	});
+
+	function enviarFormularioAdiciona() {
+		event.preventDefault();
+
+		var dados = $('#form-adiciona-noticia').serialize();
+
+		$.post(baseURL+'usuario/dashboard/publicar-noticia', dados, function(resultado) {
+			if (resultado == 'error')
+			swal({
+				title: 'Erro',
+				text: 'Ocorreu um erro no envio dos dados',
+				icon: 'error',
+				button: 'Ok'
+			})
+			else if (resultado == 'success')
+				swal({
+					title: 'Sucesso',
+					text: 'A notícia foi publicada com sucesso',
+					icon: 'success',
+					button: 'Ok'
+				}).then((a) => {
+					window.location = baseURL+"usuario/dashboard";					
+				});
+			});
+	}
+
+	function enviarFormularioEdita() {
+		event.preventDefault();
+
+		var dados = $('#form-edita-noticia').serialize();
+
+		$.post(baseURL+'usuario/dashboard/editar-noticia', dados, function(resultado) {
+			if (resultado == 'error')
+				swal({
+					title: 'Erro na edição',
+					text: 'Não foi possivel realizar a modificação, por favor tente novamente',
+					icon: 'warning',
+					button: 'Ok'
+				});
+
+			else {
+				const novosDados = JSON.parse(resultado);
+
+				atualizarNoticia(novosDados);
+
+				$('#modal-editar').modal('hide');
+
+				swal({
+					title: 'Modificação realizada',
+					text: 'Edição realizada com sucesso !',
+					icon: 'success',
+					button: 'Ok'
+				});
+			}
+		});
+	}
+
+	function atualizarNoticia(dados) {
+		const titulo = dados['titulo'];
+		const subtitulo = dados['subtitulo'];
+		const data = dados['dataEdicao'];
+		
+		elementoAtual.find('.titulo a').text(titulo);
+		elementoAtual.find('.subtitulo').text(subtitulo);
+		elementoAtual.find('.data-noticia').text(data);
+	}
+
   $('#noticia').froalaEditor({
     toolbarButtons: [
     'bold', 'italic', 'underline', 'strikethrought', 'paragraphFormat', 'insertLink', 'insertImage', 'formatOL',
@@ -66,6 +183,10 @@ $(document).ready(function() {
       const urlImagemSeraRemovida = $img[0].src;
       if (verificaQuantidadeImagem(urlImagemSeraRemovida) == 1)
         removerSlideCarrossel(urlImagemSeraRemovida);
+
+    })
+    .on('froalaEditor.contentChanged', function () {
+      validator.element("#noticia");
 
     })
     .on('froalaEditor.image.error', function (e, editor, error, response) {

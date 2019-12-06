@@ -101,6 +101,19 @@
 	color: #F27949;
 }
 
+#form-edita-noticia textarea#noticia {
+	display: block !important;
+	padding: 0;
+	border: 0;
+	width: 0;
+	height: 0;
+}
+
+#form-edita-noticia .aviso .error {
+	color: #F20000;
+	text-decoration: underline;
+}
+
 
 /* MODAL SWEET ALERT */
 .swal-text {

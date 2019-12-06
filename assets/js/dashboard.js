@@ -1,5 +1,6 @@
+var elementoAtual = null;
+
 $(document).ready(function() {
-	var elementoAtual = null;
 	var imagensDeletadas = [];
 	var novasImagens = [];
 	var imagensTrocadas = [];
@@ -11,7 +12,12 @@ $(document).ready(function() {
 		$.get(baseURL+"usuario/dashboard/informacoes-noticia", {codigo: codigo_noticia}, function(resultado) {
 
 			if (resultado == "Usuário não autorizado")
-				print('');
+				swal({
+					title: 'Usuário não autorizado',
+					text: 'A notícia que você deseja modificar não pertence a você',
+					icon: 'warning',
+					button: 'Ok'
+				});
 
 			else {
 				dados = JSON.parse(resultado);
@@ -68,34 +74,8 @@ $(document).ready(function() {
 		});
 	});
 
-	$("#form-edita-noticia").submit(function(event) {
-		event.preventDefault();
-
-		var dados = $('#form-edita-noticia').serialize();
-
-		$.post(baseURL+'usuario/dashboard/editar-noticia', dados, function(resultado) {
-			if (resultado == 'error')
-				swal({
-					title: 'Erro na edição',
-					text: 'Não foi possivel realizar a modificação, por favor tente novamente',
-					icon: 'warning',
-					button: 'Ok'
-				});
-
-			else {
-				const novosDados = JSON.parse(resultado);
-				atualizarNoticia(novosDados);
-
-				$('#modal-editar').modal('hide');
-
-				swal({
-					title: 'Modificação realizada',
-					text: 'Edição realizada com sucesso !',
-					icon: 'success',
-					button: 'Ok'
-				});
-			}
-		});
+	$('#modal-editar').on('hidden.bs.modal', function () {
+		$('.aviso .error').remove();
 	});
 
 	function abrirModalEdicaoPreenchido(dados) {
@@ -115,15 +95,5 @@ $(document).ready(function() {
 
 		// Se chamar apenas a função sem usar esse delay de 1s a função não funciona corretamente
 		setTimeout(submeterComoSlideAtual, 1000, dados['imagemCapa']);
-	}
-
-	function atualizarNoticia(dados) {
-		const titulo = dados['titulo'];
-		const subtitulo = dados['subtitulo'];
-		const data = dados['dataEdicao'];
-
-		elementoAtual.find('.titulo a').text(titulo);
-		elementoAtual.find('.subtitulo').text(subtitulo);
-		elementoAtual.find('.data-noticia').text(data);
 	}
 });

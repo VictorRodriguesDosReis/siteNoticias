@@ -52,14 +52,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="form-group">
 							<label for="titulo">Título</label>
 							<input type="text" name="titulo" id="titulo" class="form-control" placeholder="Título" value="">
+							<small id="aviso-titulo" class="form-text text-muted aviso"></small>
 						</div>
 						<div class="form-group">
 							<label for="subtitulo">Subtítulo</label>
 							<textarea name="subtitulo" id="subtitulo" class="form-control" placeholder="Subtítulo" value=""></textarea>
+							<small id="aviso-subtitulo" class="form-text text-muted aviso"></small>
 						</div>
 						<div class="form-group">
 							<label for="noticia">Notícia</label>
 							<textarea name="noticia" id="noticia" class="form-control custom-theme" placeholder="Digite a notícia aqui..." value=""></textarea>
+							<small id="aviso-noticia" class="form-text text-muted aviso"></small>
 						</div>
 						<div class="form-group">
 							<label>Imagem de Capa</label>
@@ -84,10 +87,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url('assets')?>/js/dashboard.js"></script>
-<script type="text/javascript" src="<?php echo base_url('assets')?>/js/froalaEditor.js"></script>
+<script type="text/javascript" src="<?php echo base_url('assets')?>/js/formularioNoticia.js"></script>
 <script type="text/javascript" src="<?php echo base_url('assets')?>/js/slickCarousel.js"></script>
 </body>
 </html>
