@@ -12,10 +12,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="form-group">
 						<label for="email">E-mail</label>
 						<input type="email" name="email" class="form-control" class="email" placeholder="E-mail" maxlength="254" required>
+						<small class="form-text text-muted aviso"></small>
 					</div>
 					<div class="form-group">
 						<label for="senha">Senha</label>
 						<input type="password" name="senha" class="form-control" class="senha" maxlength="20" placeholder="Senha" required>
+						<small class="form-text text-muted aviso"></small>
 					</div>
 
 					<button type="submit" class="btn">Entrar</button>
@@ -31,18 +33,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="form-group">
 						<label for="nome">Nome</label>
 						<input type="text" name="nome" class="form-control" id="nome" placeholder="Nome Completo" maxlength="35" required>
+						<small class="form-text text-muted aviso"></small>
 					</div>
 					<div class="form-group">
 						<label for="email">E-mail</label>
 						<input type="email" name="email" class="form-control" class="email" placeholder="E-mail" maxlength="254" required>
+						<small class="form-text text-muted aviso"></small>
 					</div>
 					<div class="form-group">
 						<label for="senha">Senha</label>
 						<input type="password" name="senha" class="form-control" class="senha" placeholder="Senha" maxlength="20" required>
+						<small class="form-text text-muted aviso"></small>
 					</div>
 					<div class="form-group">
 						<label for="confirma-senha">Confirmar senha</label>
 						<input type="password" name="confirma-senha" class="form-control" id="confirma-senha" maxlength="20" placeholder="Confirmar senha" required>
+						<small class="form-text text-muted aviso"></small>
 					</div>
 
 					<button type="submit" class="btn">Criar conta</button>
@@ -57,5 +63,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script type="text/javascript">
 		var baseURL = '<?php echo base_url() ?>';
 	</script>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets')?>/js/loginCadastro.js"></script>
