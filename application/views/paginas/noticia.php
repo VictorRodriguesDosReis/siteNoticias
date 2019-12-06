@@ -44,13 +44,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<h2><?php echo count($comentarios); ?> Comentários</h2>
 
 			<form id="form-comentario" method="post">
-				<div>
+				<div class="form-group">
 					<label for="nome">Nome</label>
 					<input type="text" name="nome" id="nome" class="form-control" placeholder="Digite seu nome..." maxlength="20" required>
+					<small class="form-text text-muted aviso"></small>
 				</div>
 				<div class="form-group">
 					<label for="comentario">Comentário</label>
 					<textarea name="comentario" id="comentario" class="form-control" placeholder="Escreva um comentário..." maxlength="250" required></textarea>
+					<small class="form-text text-muted aviso"></small>
 				</div>
 				<input type="hidden" name="codigo" value="<?php echo $codigo; ?>">
 
@@ -83,4 +85,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<p class="texto-comentario">{{comentario}}</p>
 	</div>
 </script>
+<script type="text/javascript" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url('assets')?>/js/noticia.js"></script>
