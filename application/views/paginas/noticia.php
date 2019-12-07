@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</header>
 
 			<div id="dados-publicacao">
-				<p id="autor"><?php echo $noticia['autor']; ?></p>
+				<p id="autor"><?php echo htmlspecialchars($noticia['autor'], ENT_QUOTES, 'UTF-8'); ?></p>
 				<time><?php 
 					echo date('d/m/Y H:i:s', strtotime($noticia['dt_criacao'])); 
 					if ($noticia['dt_criacao'] != $noticia['dt_alteracao'])

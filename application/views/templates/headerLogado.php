@@ -39,7 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="collapse navbar-collapse links-menu" id="link-direita">
 					<ul class="navbar-nav">
 						<li class="nav-item">
-							<a href="<?php echo base_url()?>usuario/dashboard?>" class="nav-link"><?php echo $nomeUsuario ?></a>
+							<a href="<?php echo base_url()?>usuario/dashboard?>" class="nav-link"><?php echo htmlspecialchars($nomeUsuario, ENT_QUOTES, 'UTF-8') ?></a>
 						</li>
 						<li class="nav-item">
 							<a href="<?php echo base_url()?>usuario/deslogar?>" class="nav-link">Sair</a>

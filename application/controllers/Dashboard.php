@@ -38,8 +38,8 @@ class Dashboard extends CI_Controller {
 
 		if($this->form_validation->run()) {
 			$data = array(
-				'titulo' => html_purify($this->input->post('titulo')),
-				'subtitulo' => html_purify($this->input->post('subtitulo')),
+				'titulo' => htmlspecialchars($this->input->post('titulo'), ENT_QUOTES, 'UTF-8'),
+				'subtitulo' => htmlspecialchars($this->input->post('subtitulo'), ENT_QUOTES, 'UTF-8'),
 				'noticia' => $this->input->post('noticia'),
 				'imagemCapa' => $this->input->post('imagem-capa'),
 				'codigo-usuario' => $this->session->userdata('codigo'),
@@ -80,8 +80,8 @@ class Dashboard extends CI_Controller {
 
 		if($this->form_validation->run()) {
 			$data = array(
-				'titulo' => html_purify($this->input->post('titulo')),
-				'subtitulo' => html_purify($this->input->post('subtitulo')),
+				'titulo' => htmlspecialchars($this->input->post('titulo'), ENT_QUOTES, 'UTF-8'),
+				'subtitulo' => htmlspecialchars($this->input->post('subtitulo'), ENT_QUOTES, 'UTF-8'),
 				'noticia' => $this->input->post('noticia'),
 				'imagemCapa' => $this->input->post('imagem-capa'),
 				'codigo' => $this->session->userdata('codigo'),

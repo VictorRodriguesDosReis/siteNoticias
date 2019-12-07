@@ -32,7 +32,13 @@ class Noticia extends CI_Controller {
 		$this->form_validation->set_rules('codigo', 'Código da Notícia', 'trim|required|min_length[1]|max_length[5]|integer');
 
 		if ($this->form_validation->run()) {
-			$comentarioInserido = $this->modelNoticia->insertComentario($this->input->post());
+			$data = array(
+				'nome' => htmlspecialchars($this->input->post('nome'), ENT_QUOTES, 'UTF-8'),
+				'comentario' => htmlspecialchars($this->input->post('comentario'), ENT_QUOTES, 'UTF-8'),
+				'codigo' => $this->input->post('codigo'),
+			);
+
+			$comentarioInserido = $this->modelNoticia->insertComentario($data);
 
 			$comentarioInserido['dataCriacao'] = date('d/m/Y H:i:s', strtotime($comentarioInserido['dataCriacao']));
 
